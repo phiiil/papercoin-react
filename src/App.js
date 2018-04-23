@@ -2,19 +2,23 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Book from './book.js'
+import CssBaseline from 'material-ui/CssBaseline';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Papercoin</h1>
-        </header>
+      <React.Fragment>
+      <CssBaseline />
 
-        <Book />
+        <div className="App">
+          <header className="App-header">
+            <h1 className="App-title">Papercoin</h1>
+          </header>
 
-      </div>
+          <Book />
+
+        </div>
+      </React.Fragment>
     );
   }
 }
