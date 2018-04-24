@@ -8,7 +8,7 @@ import WebFont from 'webfontloader';
 
 WebFont.load({
   google: {
-    families: ['Nothing You Could Do:400', 'cursive']
+    families: ['Nothing You Could Do:400', 'cursive', 'Material Icons']
   }
 });
 

@@ -48,6 +48,7 @@ const data = [
 */
 
 function CustomizedTable(props) {
+  
   const { classes, data } = props;
   console.log(data);
   return (
