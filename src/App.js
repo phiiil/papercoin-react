@@ -7,6 +7,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'; // add
 import CssBaseline from 'material-ui/CssBaseline';
 import Button from 'material-ui/Button';
 import FileUpload from '@material-ui/icons/FileUpload';
+import { FormGroup, FormLabel, FormControlLabel } from 'material-ui/Form';
+import Switch from 'material-ui/Switch';
+import Grid from 'material-ui/Grid';
 import _ from 'lodash'
 
 
@@ -90,15 +93,27 @@ class App extends Component {
           <header className="App-header">
             <h1 className="App-title">Papercoin</h1>
           </header>
-          <Button  variant="raised" color="action" onClick={this.handleRefresh}>
-            { this.state.loading ? "Loading..." : "Refresh"}
-            <FileUpload />
-          </Button>
+          <Grid container row xs={12} spacing={16} justify={"center"}>
+            <Grid item>
+              <Button  variant="raised" color="action" onClick={this.handleRefresh}>
+                { this.state.loading ? "Loading..." : "Refresh"}
+                <FileUpload />
+              </Button>
+            </Grid>
+            <Grid item>
+              <p> 5 </p>
+            </Grid>
+            <Grid item>
+              <FormControlLabel control={
+                <Switch value="fullBook" color="default" />
+              } label="Full" />
+            </Grid>
+          </Grid>
 
           <Book bookData={this.state.book} />
 
-
         </div>
+
       </React.Fragment>
       </MuiThemeProvider>
     );

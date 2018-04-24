@@ -1,5 +1,5 @@
 import React from 'react';
-import Grid from 'material-ui/Grid';
+
 import Paper from 'material-ui/Paper';
 import './book.css';
 import PropTypes from 'prop-types';
