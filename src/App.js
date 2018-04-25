@@ -15,6 +15,7 @@ import _ from 'lodash'
 
 const API_URL = "https://api.quadrigacx.com/v2/order_book";
 const DISPLAY_DEPTH = 5;
+const DISPLAY_DEPTH_FULL = 25;
 
 class App extends Component {
 
@@ -50,8 +51,8 @@ class App extends Component {
     // store original book data form API
     this.setState({ rawBook: rawBook});
     // top bids
-    var topBids = rawBook.bids;
-    var topAsks = rawBook.asks;
+    var topBids = rawBook.bids.slice(0, DISPLAY_DEPTH_FULL);
+    var topAsks = rawBook.asks.slice(0, DISPLAY_DEPTH_FULL);
     if (!this.state.fullDepth) {
       topBids = topBids.slice(0, DISPLAY_DEPTH);
       topAsks = topAsks.slice(0, DISPLAY_DEPTH);
