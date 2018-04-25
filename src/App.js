@@ -20,9 +20,10 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {book: [], loading: true};
+    this.state = {book: [], loading: true, fullDepth: false};
     // button bindings
     this.handleRefresh = this.handleRefresh.bind(this);
+    this.handleFiveOrFullSwitch = this.handleFiveOrFullSwitch.bind(this);
   }
 
   fetchBook() {
@@ -46,11 +47,19 @@ class App extends Component {
    * Convert book data into format for diaplay
    */
   setBookData(rawBook) {
+    // store original book data form API
+    this.setState({ rawBook: rawBook});
     // top bids
-    var topBids = rawBook.bids.slice(0, DISPLAY_DEPTH);
-    var topAsks = rawBook.asks.slice(0, DISPLAY_DEPTH);
+    var topBids = rawBook.bids;
+    var topAsks = rawBook.asks;
+    if (!this.state.fullDepth) {
+      topBids = topBids.slice(0, DISPLAY_DEPTH);
+      topAsks = topAsks.slice(0, DISPLAY_DEPTH);
+    }
+    // place bis and ask side by side in array for display
     var bidAsks = _.zip(topBids, topAsks);
     console.log(bidAsks);
+    // create object for display
     var newBook = bidAsks.map((item) => {
       return {
         bidSizeBTC: item[0][1],
@@ -80,6 +89,12 @@ class App extends Component {
     this.fetchBook();
   }
 
+  handleFiveOrFullSwitch(event) {
+    console.log(event.target.checked);
+    this.state.fullDepth = event.target.checked;
+    this.fetchBook();
+  }
+
 
   render() {
     console.log('App Render');
@@ -93,21 +108,23 @@ class App extends Component {
           <header className="App-header">
             <h1 className="App-title">Papercoin</h1>
           </header>
-          <Grid container row xs={12} spacing={16} justify={"center"}>
+          <Grid container row xs={12}  spacing={16} justify={"center"}>
             <Grid item>
               <Button  variant="raised" color="action" onClick={this.handleRefresh}>
                 { this.state.loading ? "Loading..." : "Refresh"}
                 <FileUpload />
               </Button>
             </Grid>
+
             <Grid item>
               <p> 5 </p>
             </Grid>
             <Grid item>
               <FormControlLabel control={
-                <Switch value="fullBook" color="default" />
+                <Switch color="default" onChange={this.handleFiveOrFullSwitch}/>
               } label="Full" />
             </Grid>
+
           </Grid>
 
           <Book bookData={this.state.book} />

@@ -4,11 +4,14 @@ import { withStyles } from 'material-ui/styles';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 import NumberFormat from 'react-number-format';
+import grey from 'material-ui/colors/grey';
 
 const CustomTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   body: {
     fontSize: 20,
@@ -22,7 +25,11 @@ const styles = theme => ({
     overflowX: 'auto',
   },
   table: {
-    minWidth: 400,
+    minWidth: 200,
+  },
+  centered: {
+    textAlign: 'center',
+    backgroundColor: grey[900],
   },
   row: {
     '&:nth-of-type(odd)': {
@@ -31,30 +38,19 @@ const styles = theme => ({
   },
 });
 
-/*
-let id = 0;
-function createData(name, calories, fat, carbs, protein) {
-  id += 1;
-  return { id, name, calories, fat, carbs, protein };
-}
-
-const data = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-*/
 
 function CustomizedTable(props) {
-  
+
   const { classes, data } = props;
   console.log(data);
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
+          <TableRow >
+            <CustomTableCell className={classes.centered} colSpan={3}>BID</CustomTableCell>
+            <CustomTableCell className={classes.centered} colSpan={3}>ASK</CustomTableCell>
+          </TableRow>
           <TableRow>
             <CustomTableCell numeric>Bid Size (CAD)</CustomTableCell>
             <CustomTableCell numeric>Bid Size (BTC)</CustomTableCell>
